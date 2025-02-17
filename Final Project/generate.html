@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="style.css"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    </head>
+    <body>
+        <div class="grid-container">
+        <div id="head">
+           <a href="homepage.html"> <img src="images/logo.png" height="150px" width="150px"> </a>
+            <header>
+                <h1>Flavour Fusion</h1>
+            </header>
+        </div>
+        <div id="hamburger">
+            <button class="hamburger_nav">&#9776;</button>
+            <button class="cross">&#735;</button>
+            <div id="nav">
+                <nav><ul>
+                    <li><a href="homepage.html">Products</a></li>
+                    <li><a href="">Recipe Generator</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+
+                </ul></nav>
+            </div>
+        </div>
+        <div id="nav_min_900px">
+            <nav><ul>
+                <li><a href="homepage.html">Products</a></li>
+                <li><a href="">Recipe Generator</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="cart.html">Cart</a></li>
+
+            </ul></nav>
+        </div>
+        <div class="main">
+        <h2>Generate Recipies</h2>
+        <div id="fuse_items">
+            <div id="fuse_container">
+            <table id="product_list">
+                <thead>
+                    <tr>
+                        <th id="title">Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <div id="submit">
+            <button id="final_fuse" type="button">Fuse</button>
+            </div>
+        </div>
+         
+     </div>
+        </div>
+        </div>
+        <script type="module">
+              // Import the functions you need from the SDKs you need
+              import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+                import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+                import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";
+                // TODO: Add SDKs for Firebase products that you want to use
+                // https://firebase.google.com/docs/web/setup#available-libraries
+              
+                // Your web app's Firebase configuration
+                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+                const firebaseConfig = {
+                  apiKey: "AIzaSyD4k3ZLgR1OxHAqJ2hdaR2TUB7xH60siww",
+                  authDomain: "flavour-fusion-56f3f.firebaseapp.com",
+                  projectId: "flavour-fusion-56f3f",
+                  storageBucket: "flavour-fusion-56f3f.appspot.com",
+                  messagingSenderId: "721655450281",
+                  appId: "1:721655450281:web:915f086c4c0c68598777b8",
+                  measurementId: "G-H5NSXXJR5Y"
+                };
+              
+       // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Get a reference to the table and pre_purchase_items div
+        const table = document.getElementById('product_list');
+               const prePurchaseItems = document.getElementById('fuse_items');
+
+               const fetchUserCartData = async (userId) => {
+    try {
+        const fuseDocRef = collection(db, 'fuse', userId, 'products'); 
+        const snapshot = await getDocs(fuseDocRef);
+        const cartData = [];
+        snapshot.forEach(doc => {
+            const item = doc.data();
+            cartData.push(item);
+        });
+        return cartData;
+    } catch (error) {
+        console.error("Error fetching user's cart data:", error);
+        return [];
+    }
+};
+
+    // Define populateCartTable function
+    const populateCartTable = (cartData) => {
+        const tbody = document.querySelector('#product_list tbody');
+        tbody.innerHTML = ''; // Clear existing table rows
+        cartData.forEach(product => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${product.name}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    };
+// Define the deleteFromCart function
+const deleteFromCart = async (productName, userId) => {
+    try {
+        // Construct the Firestore document path for the product in the user's cart
+        const fuseDocRef = doc(db, 'fuse', userId, 'products', productName); 
+
+        // Delete the document from Firestore
+        await deleteDoc(fuseDocRef);
+
+        console.log(`Product "${productName}" deleted from fuse`);
+    } catch (error) {
+        console.error("Error deleting product from fuse:", error);
+    }
+};
+// Add event listener to each row in the table
+table.addEventListener('click', async (event) => {
+    const row = event.target.closest('tr'); // Find the closest row element clicked
+
+    // Check if the clicked element is within a table row
+    if (row && confirm('Are you sure you want to delete this item?')) {
+        // Get the product name from the first cell of the row
+        const productName = row.cells[0].textContent.trim();
+        console.log(productName);
+        // Delete the product from the cart
+        const user = auth.currentUser;
+        if (user) {
+            const userId = user.uid;
+            await deleteFromCart(productName, userId);
+            // If successful, remove the row from the HTML table
+            row.remove();
+
+            console.log('Item deleted from cart and Firestore.');
+        } else {
+            console.log("No user is currently logged in.");
+            // Handle the case where no user is logged in
+        }
+    }
+});
+
+const populateTable = async () => {
+    const user = auth.currentUser;
+    console.log(user);
+    if (user) {
+        const userId = user.uid;
+        const cartData = await fetchUserCartData(userId);
+        populateCartTable(cartData);
+    } else {
+        console.log("User not authenticated.");
+        // Handle the case where the user is not authenticated
+    }
+};
+
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      console.log('User is signed in');
+      populateTable();
+      // Perform actions for signed-in user
+    } else {
+      // User is signed out
+      console.log('User is signed out');
+      // Perform actions for signed-out user
+    }
+    }); 
+    
+    document.addEventListener('DOMContentLoaded', () => {
+    const fuseButton = document.getElementById('final_fuse');
+    const productList = document.querySelector('#product_list tbody');
+
+    fuseButton.addEventListener('click', async () => {
+        const ingredients = [];
+
+        // Iterate through each row of the table to collect ingredients
+        const productRows = productList.querySelectorAll('tr');
+        productRows.forEach(row => {
+            const productName = row.cells[0].textContent.trim(); 
+            ingredients.push(productName);
+        });
+    
+        var collect = ingredients.join(',');
+        // Construct the API URL with the gathered ingredients
+        const apiKey = '86c4722457504ce0bcc2b781e46385f8'; 
+        const apiUrl = 'https://api.spoonacular.com/recipes/findByIngredients?apiKey=86c4722457504ce0bcc2b781e46385f8&ingredients=' + collect + '&number=3';
+
+
+        // Perform the API call
+        try {
+            console.log(apiUrl);
+            
+            console.log(collect);
+            const response = await fetch(apiUrl);
+            if (response.ok) {
+                const recipes = await response.json();
+                // Handle the retrieved recipes
+                console.log(recipes);
+                if (recipes.length > 0) {
+                    displayRecipes(recipes);  // Display the first recipe in the random_recipe div
+                } else {
+                    displayRecipe(null); // Display a message if no recipes are found
+                }
+            } else {
+                console.error('Failed to fetch recipes:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching recipes:', error);
+        }
+    });
+});
+const displayRecipes = (recipes) => {
+    let randomRecipeDiv = document.getElementById('random_recipe');
+
+    // Check if the random_recipe div exists, if not create it
+    if (!randomRecipeDiv) {
+        randomRecipeDiv = document.createElement('div');
+        randomRecipeDiv.id = 'random_recipe';
+        document.body.appendChild(randomRecipeDiv);
+    }
+
+    // Clear any existing content in the random_recipe div
+    randomRecipeDiv.innerHTML = '';
+
+    if (recipes && recipes.length > 0) {
+        recipes.forEach(recipe => {
+            const recipeHTML = `
+            <div class="recipe">
+                <img src="${recipe.image}" alt="${recipe.title}" />
+                <h3>${recipe.title}</h3>
+                <h4>Missed Ingredients:</h4>
+                <ul>
+                    ${recipe.missedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}
+                </ul>
+                <h4>Used Ingredients:</h4>
+                <ul>
+                    ${recipe.usedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}
+                </ul>
+            </div>
+            <br>
+            <br>
+            `;
+            randomRecipeDiv.innerHTML += recipeHTML;
+        });
+    } else {
+        randomRecipeDiv.innerHTML = '<p>No valid recipes available.</p>';
+    }
+};
+$(window).scroll(function() {
+        var headerHeight = $('#head').outerHeight();
+    
+        var scrollTop = $(window).scrollTop();
+
+        if (scrollTop > headerHeight) {
+            $('#hamburger').addClass('fixed');
+            $('#nav_min_900px').addClass('fixed');
+        } else {
+            $('#hamburger').removeClass('fixed');
+            $('#nav_min_900px').removeClass('fixed');
+        }
+    });
+    //hamburger nav slide animation
+    $("#nav").hide();
+    $(".cross").hide();
+    $(".hamburger_nav").click(function() {
+        $("#nav").slideToggle("slow", function() {
+            $(".hamburger_nav").hide();
+            $(".cross").show();
+        });
+    });
+
+    $(".cross").click(function() {
+        $("#nav").slideToggle("slow", function() {
+            $(".hamburger_nav").show();
+            $(".cross").hide();
+        })
+    });
+        </script>
+    </body>
+</html>
+        

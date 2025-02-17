@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+<food category ="fruits">
+    <name>Apples</name>
+    <price>$2.50</price>
+</food>
+<food category="fruits">
+    <name>Pineapple</name>
+    <price>$3.99</price>
+</food>
+<food category="fruits">
+    <name>Grapes</name>
+    <price>$3.99</price>
+</food>
+<food category="fruits">
+    <name>Strawberry</name>
+    <price>$4.99</price>
+</food>
+<food category="veggies">
+     <name>Romaine Lettuce Hearts</name>
+     <price>5.99</price>
+</food>
+<food category="veggies">
+     <name>Iceberg Lettuce</name>
+     <price>2.99</price>
+</food>
+<food category="veggies">
+     <name>English Cucumber</name>
+     <price>3.99</price>
+</food>
+<food category="veggies">
+     <name>Baby-Cut Carrots</name>
+     <price>1.99</price>
+</food>
+<food category="spice">
+    <name>Chinese Five Spice</name>
+    <price>$1.99</price>
+</food>
+<food category="spice">
+    <name>Goya</name>
+    <price>$5.50</price>
+</food>
+<food category="spice">
+    <name>Garlic Powder</name>
+    <price>$6.99</price>
+</food>
+<food category="snacks">
+    <name>The Decadent Cookies</name>
+    <price>$1.99</price>
+</food>
+<food category="snacks">
+    <name>Vanilla Flavoured Old-Fashioned Ice Cream</name>
+    <price>$5.99</price>
+</food>
+<food category="snacks">
+    <name>Chocolate Pudding</name>
+    <price>$2.99</price>
+</food>
+<food category="snacks">
+    <name>Vanilla Pudding</name>
+    <price>$2.99</price>
+</food>
+<food category="Dairy and Eggs">
+    <name>Eggs</name>
+    <price>$3.99</price>
+</food>
+<food category="Dairy and Eggs">
+    <name>Greek Yogurt</name>
+    <price>$8.49</price>
+</food>
+<food category="Dairy and Eggs">
+    <name>Pizza Mozzarella Cheese</name>
+    <price>$3.49</price>
+</food>
+</products>

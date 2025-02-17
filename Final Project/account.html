@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <link rel="stylesheet" href="style.css"> 
+       <!---- <script type="text/javascript" src="auth.js"></script> -->
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="head">
+            <a href="homepage.html"> <img src="images/logo.png" height="150px" width="150px"> </a>
+             <header>
+                 <h1>Flavour Fusion</h1>
+             </header>
+         </div>
+         <div id="hamburger">
+             <button class="hamburger_nav">&#9776;</button>
+             <button class="cross">&#735;</button>
+             <div id="nav">
+                 <nav><ul>
+                     <li><a href="homepage.html">Products</a></li>
+                     <li><a href="generate.html">Recipe Generator</a></li>
+                     <li><a href="account.html">Account</a></li>
+                     <li><a href="cart.html">Cart</a></li>
+                 </ul></nav>
+             </div>
+         </div>
+         <div id="nav_min_900px">
+            <nav><ul>
+                <li><a href="homepage.html">Products</a></li>
+                <li><a href="generate.html">Recipe Generator</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="cart.html">Cart</a></li>
+
+            </ul></nav>
+        </div>
+         <div class="main">
+            <div id="not_sign_in">
+                <h2 class="account_h2">Sign In</h2>
+                
+                <form id="not_sign_in_form">
+                    <label for="email">Email:</label>
+                    <input type="email" id="mail" name="email"><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="pass" name="password"><br>
+                    <button type="submit" id="sign_in">Sign In</button>
+                </form>
+               
+                <a id="register" href="#sign_up">Click here to create an account</a>
+
+            </div>
+            <div id="signed_in">
+                <!-- Account info page -->
+                <h2 class="account_h2">Account Info</h2>
+                <form id="account_info">
+                    <label for="email">Email:</label>
+                    <input type="email" id="mail_logged_in" name="email" readonly ><br>
+                <button type="submit" id="logout_button">Logout</button>
+                </form>
+            </div> 
+            <div id="sign_up">
+                <h2 class="account_h2">Sign Up</h2>
+                <form id="sign_up_form">
+                    <label for="email">Email:</label>
+                    <input type="email" id="mail_signup" name="email" ><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="pass_signup" name="password"><br>
+                    <label for="password">Re-Enter Password:</label>
+                    <input type="password" id="pass_confirm" name="password"><br>
+                    <button type="submit" id="sign_up_button">Sign Up</button>
+                </form>
+            </div>
+         </div>
+         <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+            import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+              apiKey: "AIzaSyD4k3ZLgR1OxHAqJ2hdaR2TUB7xH60siww",
+              authDomain: "flavour-fusion-56f3f.firebaseapp.com",
+              projectId: "flavour-fusion-56f3f",
+              storageBucket: "flavour-fusion-56f3f.appspot.com",
+              messagingSenderId: "721655450281",
+              appId: "1:721655450281:web:915f086c4c0c68598777b8",
+              measurementId: "G-H5NSXXJR5Y"
+            };
+            
+   // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+   
+    function checkAuthState() {
+            auth.onAuthStateChanged(function(user) {
+                if (user) {
+                    $('#not_sign_in').hide();
+                    $('#signed_in').show();
+                } else {
+                    $('#not_sign_in').show();
+                    $('#signed_in').hide();
+                }
+            });
+        }
+            // Function to fetch and display user information
+            function displayUserInfo(user) {
+    const emailField = document.querySelector('#mail_logged_in');
+
+    if (user) {
+        // User is signed in, populate the email field with the user's email
+        emailField.value = user.email;
+    } else {
+        // User is not signed in, clear the email field
+        emailField.value = '';
+    }
+}
+
+        // Call the function when the window is loaded
+        window.onload = function() {
+            checkAuthState();
+        
+   
+    // Get the sign-up form
+    const signUpForm = document.querySelector('#sign_up_form');
+    const signInForm = document.querySelector('#not_sign_in_form'); // Changed to match your HTML
+
+
+
+    auth.onAuthStateChanged(function(user) {
+    if (user) {
+        console.log("User is signed in:", user.uid);
+        $('#not_signed_in').hide();
+        $('#signed_in').show();
+        displayUserInfo(user);
+    } else {
+        console.log("User is signed out");
+        $('#not_signed_in').show();
+        $('#signed_in').hide();
+    }
+});
+   
+};
+$(document).ready(function() {
+        // Hamburger nav slide animation
+        $("#nav").hide();
+        $(".cross").hide();
+        
+        $(".hamburger_nav").click(function() {
+            $("#nav").slideToggle("slow", function() {
+                $(".hamburger_nav").toggle();
+                $(".cross").toggle();
+            });
+        });
+        
+        $(".cross").click(function() {
+            $("#nav").slideToggle("slow", function() {
+                $(".hamburger_nav").toggle();
+                $(".cross").toggle();
+            });
+        });
+    
+                $(window).scroll(function() {
+                    var headerHeight = $('#head').outerHeight();
+                    var scrollTop = $(window).scrollTop();
+    
+                    if (scrollTop > headerHeight) {
+                        $('#hamburger').addClass('fixed');
+                    } else {
+                        $('#hamburger').removeClass('fixed');
+                    }
+                });
+                $("#sign_up").hide();
+                $("#sign_up_button").click(function (e) {
+    e.preventDefault(); // Prevent form submission
+
+    var pass = document.getElementById("pass_signup").value;
+    var pass_confirm = document.getElementById("pass_confirm").value; // Fixed variable name
+    var mail = document.getElementById("mail_signup").value;
+
+    if (pass !== pass_confirm) { // Use strict comparison operator
+        alert("Passwords do not match");
+    } else if (mail.length === 0) { // Use strict comparison operator
+        alert("Email is required");
+    } else {
+        // Get user info from the form
+        const email = document.getElementById("mail_signup").value; // Access the email input directly
+        const password = document.getElementById("pass_signup").value;
+
+        // Sign up user 
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(cred => {
+                alert('Account created');
+                console.log(cred);
+                const modal = document.querySelector('#not_sign_in');
+            })
+            .catch(error => {
+                console.error(error.message);
+            });
+    }
+});
+
+// Show sign up form when register link is clicked
+$("#register").click(function() {
+    $("#sign_up").show();
+    $("#not_sign_in").hide();
+});
+
+// Show sign in form when sign up button is clicked
+$("#sign_up_button").click(function() {
+    $("#not_sign_in").show();
+    $("#sign_up").hide();
+});
+
+// Get the sign-in form
+const signInForm = $('#not_sign_in_form');
+
+// Attach event listener to the sign-in form
+signInForm.on('submit', function(e) {
+    e.preventDefault(); // Prevent form submission
+    
+    // Get user info from the form
+    const email = $('#mail').val();
+    const password = $('#pass').val();
+
+    // Sign in user 
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in successfully
+            const user = userCredential.user;
+            console.log('Signed in as:', user.email);
+           // window.location.href = 'homepage.html';
+        })
+        .catch((error) => {
+            // Handle errors
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorMessage);
+            alert("User does not exist");
+        });
+});
+
+const logout = document.querySelector('#logout_button');
+logout.addEventListener("click", (e) => {
+    e.preventDefault();
+    auth.signOut();
+})
+
+
+$('#not_signed_in').hide();
+
+});
+$(window).scroll(function() {
+        var headerHeight = $('#head').outerHeight();
+    
+        var scrollTop = $(window).scrollTop();
+
+        if (scrollTop > headerHeight) {
+            $('#hamburger').addClass('fixed');
+            $('#nav_min_900px').addClass('fixed');
+        } else {
+            $('#hamburger').removeClass('fixed');
+            $('#nav_min_900px').removeClass('fixed');
+        }
+    });
+         </script>
+    </body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="style.css"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    </head>
+    <body>
+        <div class="grid-container">
+        <div id="head">
+           <a href="homepage.html"> <img src="images/logo.png" height="150px" width="150px"> </a>
+           <div id="search_container">
+            <form>
+           <input id="search" type="text" placeholder="Search.." autocomplete="on">
+            </form>
+            <ul id="suggestions"></ul>
+           </div>
+            <header>
+                <h1>Flavour Fusion</h1>
+            </header>
+        </div>
+        <div id="hamburger">
+            <button class="hamburger_nav">&#9776;</button>
+            <button class="cross">&#735;</button>
+            <div id="nav">
+                <nav><ul>
+                    <li><a href="homepage.html">Products</a></li>
+                    <li><a href="generate.html">Recipe Generator</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+
+                </ul></nav>
+            </div>
+        </div>
+        <div id="nav_min_900px">
+            <nav><ul>
+                <li><a href="homepage.html">Products</a></li>
+                <li><a href="generate.html">Recipe Generator</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="cart.html">Cart</a></li>
+
+            </ul></nav>
+        </div>
+        <div class="main">
+            <h2>Welcome</h2>
+            <div class="ad">
+                <img id="adImage" src="images/cookie_ad.jpg" >
+            </div>
+            
+            <div id="random_recipe">
+                
+            </div>
+            <h2>Deals To Fuel Your Cravings</h2>
+                <div class="products-container">
+                    <div class="products" data-name="Chinese Five Spice"id="4">
+                        <img src="images/fivespice.jpg" height="70px" width="70px">
+                        <p>Chinese Five Spice <br><span class="sales">$1.99</span></p>
+                        <div class="buttons">
+                            <button type="button" class="calc" id="fivespice" name="add_to_cart" data-name="Chinese Five Spice">Add To Cart</button>
+                        </div>
+                    </div>
+                    <div class="products" data-name="Pineapple" id="3">
+                        <img src="images/pineapple.jpg" height="70px" width="70px">
+                        <p>Pineapple <br><span class="sales">2 for $3.99</span></p>
+                        <div class="buttons">
+                            <button type="button" class="calc" id="fivespice" name="add_to_cart" data-name="Pineapple">Add To Cart</button>
+                            <button type="button" class="fuse" id="fivespice_fuse" name="fusion"data-name="pineapple">Fuse</button>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="products"data-name="Grapes" id="2" >
+                        <img src="images/grapes.jpg" height="70px" width="70px">
+                        <p>Grapes <br><span class="sales">$3.99</span></p>
+                        <div class="buttons">
+                            <button type="button" class="calc" id="fivespice" name="add_to_cart" data-name="Grapes">Add To Cart</button>
+                            <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="grapes">Fuse</button>
+                        </div>
+                        
+                    <!-- Add more product items here -->
+                </div>
+                <div class="products" data-name="Garlic Powder">
+                    <img src="images/garlic_powder.jpg" height="70px" width="70px">
+                    <p>Garlic Powder <br><span class="sales">$6.99</span></p>
+                    <div class="buttons">
+                        <button type="button" class="calc" id="fivespice" name="add_to_cart" data-name="Garlic Powder">Add To Cart</button>
+                        <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="garlic powder">Fuse</button>
+                    </div>
+                </div>
+
+            </div>
+            <h2>Spice Up Your Life</h2>
+            <div class="products-container">
+            <div class="products" data-name="Goya" id="1">
+                <img src="images/goya.png" height="70px" width="70px">
+                <p>Goya <br>$5.50</p>
+                <div class="buttons">
+                    <button type="button" class="calc" id="goya" name="add_to_cart" data-name="Goya">Add To Cart</button>
+                </div>
+            </div>
+            <div class="products" data-name="Chinese Five Spice" id="4">
+                <img src="images/fivespice.jpg" height="70px" width="70px">
+                <p>Chinese Five Spice <br><span class="sales">$1.99</span></p>
+                <div class="buttons">
+                    <button type="button" class="calc" id="fivespice" name="add_to_cart" data-name="Chinese Five Spice">Add To Cart</button>
+                </div>
+            </div>
+            <div class="products" data-name="Garlic Powder">
+                <img src="images/garlic_powder.jpg" height="70px" width="70px">
+                <p>Garlic Powder <br><span class="sales">$6.99</span></p>
+                <div class="buttons">
+                    <button type="button" class="calc" id="fivespice" name="add_to_cart" data-name="Garlic Powder">Add To Cart</button>
+                    <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="garlic powder">Fuse</button>
+                </div>
+            </div>
+            </div>
+            <h2>We Know You Forgot Your Fruit...</h2>
+            <div class="products-container">
+            <div class="products" data-name="Apples" id="5">
+                <img src="images/apples.jpg" height="70px" width="70px">
+                <p>Apples <br>$2.50</p>
+                <div class="buttons">
+                    <button type="button" class="calc" id="apples" name="add_to_cart"  data-name="Apples">Add To Cart</button>
+                    <button type="button" class="fuse" id="apples_fuse" name="fusion" data-name="apples">Fuse</button>
+                </div>
+            </div>
+            <div class="products" data-name="Grapes">
+                <img src="images/grapes.jpg" height="70px" width="70px">
+                <p>Grapes <br><span class="sales">$3.99</span></p>
+                <div class="buttons">
+                    <button type="button" class="calc" id="grapes" name="add_to_cart" data-name="Grapes">Add To Cart</button>
+                    <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="grapes">Fuse</button>
+                </div>
+            </div>
+            <div class="products" data-name="Pineapple">
+                <img src="images/pineapple.jpg" height="70px" width="70px">
+                <p>Pineapple <br><span class="sales">2 for $3.99</span></p>
+                <div class="buttons">
+                    <button type="button" class="calc" id="pineapple" name="add_to_cart" data-name="Pineapple">Add To Cart</button>
+                    <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="pineapple">Fuse</button>
+                </div>
+            </div>
+            <div class="products" data-name="Strawberry">
+                <img src="images/strawberry.jpg" height="70px" width="70px">
+                <p>Strawberry<br><span class="sales">$4.99</span></p>
+                <div class="buttons">
+                    <button type="button" class="calc" id="Strawberry" name="add_to_cart" data-name="Strawberry">Add To Cart</button>
+                    <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="strawberry">Fuse</button>
+                </div>
+            </div>
+            </div>
+            
+                <h2>Snack Till You Can't</h2>
+                <div class="products-container">
+                    <div class="products" data-name="The Decadent Cookies">
+                        <img src="images/cookie.png" height="70px" width="70px">
+                        <p>Cookies <br>$1.99</p>
+                        <div class="buttons">
+                            <button type="button" class="calc" id="Cookies" name="add_to_cart" data-name="The Decadent Cookies">Add To Cart</button>
+                            <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="cookies">Fuse</button>
+                        </div>
+                    </div>
+                    <div class="products" data-name="Vanilla Flavoured Old-Fashioned Ice Cream">
+                        <img src="images/ice_cream.jpg" height="70px" width="70px">
+                        <p>Vanilla Flavoured<br> Old-Fashioned Ice Cream <br>$5.99</p>
+                        <div class="buttons">
+                            <button type="button" class="calc" id="ice_cream" name="add_to_cart" data-name="Vanilla Flavoured Old-Fashioned Ice Cream">Add To Cart</button>
+                            <button type="button" class="fuse" id="fivespice_fuse" name="fusion"data-name="ice cream">Fuse</button>
+                        </div>
+                    </div>
+                    <div class="products" data-name="Chocolate Pudding">
+                        <img src="images/choc_pudding.jpg" height="70px" width="70px">
+                        <p>Chocolate Pudding<br>$2.99</p>
+                        <div class="buttons">
+                            <button type="button" class="calc" id="ice_cream" name="add_to_cart" data-name="Chocolate Pudding">Add To Cart</button>
+                            <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="pudding">Fuse</button>
+                        </div>
+                    </div>
+                    <div class="products" data-name="Vanilla Pudding">
+                        <img src="images/van_pudding.jpg" height="70px" width="70px">
+                        <p>Vanilla Pudding<br>$2.99</p>
+                        <div class="buttons">
+                            <button type="button" class="calc" id="van_pud" name="add_to_cart" data-name="Vanilla Pudding">Add To Cart</button>
+                            <button type="button" class="fuse" id="van_pud_fuse" name="fusion" data-name="pudding">Fuse</button>
+                        </div>
+                    </div>
+                </div>
+                    <h2>Dairy and Eggs</h2>
+                    <div class="products-container">
+                        <div class="products" data-name="Eggs">
+                            <img src="images/eggs.jpg" height="70px" width="70px">
+                            <p>Eggs<br>$3.99</p>
+                            <div class="buttons">
+                                <button type="button" class="calc" id="eggs" name="add_to_cart" data-name="Eggs">Add To Cart</button>
+                                <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="eggs">Fuse</button>
+                            </div>
+                        </div>
+                        <div class="products" data-name="Greek Yogurt">
+                            <img src="images/greek_yogurt.jpg" height="70px" width="70px">
+                            <p>Greek Yogurt<br>$8.49</p>
+                            <div class="buttons">
+                                <button type="button" class="calc" id="greek_yogurt" name="add_to_cart" data-name="Greek Yogurt">Add To Cart</button>
+                                <button type="button" class="fuse" id="fivespice_fuse" name="fusion"  data-name="greek yogurt">Fuse</button>
+                            </div>
+                        </div>
+                        <div class="products" data-name="Pizza Mozzarella Cheese">
+                            <img src="images/pizza_mozzarealla_cheese.jpg" height="70px" width="70px">
+                            <p>Pizza Mozzarella Cheese<br>$3.49</p>
+                            <div class="buttons">
+                                <button type="button" class="calc" id="Pizza_Mozzarella_Cheese" name="add_to_cart" data-name="Pizza Mozzarella Cheese">Add To Cart</button>
+                                <button type="button" class="fuse" id="Pizza_Mozzarella_Cheese_fuse" name="fusion" data-name="cheese">Fuse</button>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Greens For the Soul</h2>
+                    <div class="products-container">
+                        <div class="products" data-name="Eggs">
+                            <img src="images/lettuce.jpg" height="70px" width="70px">
+                            <p>Romaine Lettuce Hearts<br>$5.99</p>
+                            <div class="buttons">
+                                <button type="button" class="calc" id="eggs" name="add_to_cart" data-name="Romaine Lettuce Hearts">Add To Cart</button>
+                                <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="lettuce">Fuse</button>
+                            </div>
+                        </div>
+                        <div class="products" data-name="Eggs">
+                            <img src="images/iceberg.jpg" height="70px" width="70px">
+                            <p>Iceberg Lettuce<br>$2.99</p>
+                            <div class="buttons">
+                                <button type="button" class="calc" id="eggs" name="add_to_cart" data-name="Iceberg Lettuce">Add To Cart</button>
+                                <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="lettuce">Fuse</button>
+                            </div>
+                        </div>
+                        <div class="products" data-name="English Cucumber">
+                            <img src="images/english_cucumber.jpg" height="70px" width="70px">
+                            <p>English Cucumber<br>$3.99</p>
+                            <div class="buttons">
+                                <button type="button" class="calc" id="eggs" name="add_to_cart" data-name="English Cucumber">Add To Cart</button>
+                                <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="cucumber">Fuse</button>
+                            </div>
+                        </div>
+                        <div class="products" data-name="Baby-Cut Carrots">
+                            <img src="images/baby_carrots.jpg" height="70px" width="70px">
+                            <p>Baby-Cut Carrots<br>$1.99</p>
+                            <div class="buttons">
+                                <button type="button" class="calc" id="eggs" name="add_to_cart" data-name="Baby-Cut Carrots">Add To Cart</button>
+                                <button type="button" class="fuse" id="fivespice_fuse" name="fusion" data-name="carrot">Fuse</button>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+            <script type="module">
+                // Import the functions you need from the SDKs you need
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+                import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+                import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";
+                import { getFirestore, collection, addDoc, setDoc, doc, getDocs, query, where, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+                // TODO: Add SDKs for Firebase products that you want to use
+                // https://firebase.google.com/docs/web/setup#available-libraries
+              
+                // Your web app's Firebase configuration
+                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+                const firebaseConfig = {
+                  apiKey: "AIzaSyD4k3ZLgR1OxHAqJ2hdaR2TUB7xH60siww",
+                  authDomain: "flavour-fusion-56f3f.firebaseapp.com",
+                  projectId: "flavour-fusion-56f3f",
+                  storageBucket: "flavour-fusion-56f3f.appspot.com",
+                  messagingSenderId: "721655450281",
+                  appId: "1:721655450281:web:915f086c4c0c68598777b8",
+                  measurementId: "G-H5NSXXJR5Y"
+                };
+                
+       // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      console.log('User is signed in');
+      // Perform actions for signed-in user
+    } else {
+      // User is signed out
+      console.log('User is signed out');
+      // Perform actions for signed-out user
+    }
+    }); 
+    
+
+    
+    //Adding products to the database 
+//     const addFruitToFirestore = async () => {
+//     const fruitData = {
+//         product: "Baby-Cut Carrots",
+//         price: 3.99,
+//         image: "images/baby_carrots.jpg"
+//     };
+
+//     try {
+//         const docRef = await setDoc(doc(db, "veggies","Baby-Cut Carrots"), fruitData);
+//         console.log("Document written with ID: pineapple");
+//     } catch (error) {
+//         console.error("Error adding document: ", error);
+//     }
+// };
+//addFruitToFirestore();
+
+
+// Function to fetch and parse the XML file
+const fetchAndParseXML = async () => {
+    try {
+        const response = await fetch('products.xml');
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        return xmlDoc;
+    } catch (error) {
+        console.error('Error fetching/parsing XML:', error);
+        return null;
+    }
+};
+
+// Function to add a product to the cart
+const addToCart = async (productName, category, price, userId) => {
+    try {
+        // Construct the Firestore document path for the user's cart
+        const cartDocRef = doc(db, 'userCart', userId,'userCart', productName);
+
+        // Set the document with the product details
+        await setDoc(cartDocRef, {
+            name: productName,
+            price: price,
+            userId: userId
+        });
+
+        console.log(`Product "${productName}" added to cart`);
+    } catch (error) {
+        console.error("Error adding product to cart:", error);
+    }
+};
+
+document.querySelectorAll('.calc').forEach(button => {
+    button.addEventListener('click', async () => {
+        const productName = button.getAttribute('data-name');
+        const xmlDoc = await fetchAndParseXML();
+        if (xmlDoc) {
+            const foodNodes = xmlDoc.querySelectorAll('food');
+            for (let foodNode of foodNodes) {
+                const nameNode = foodNode.querySelector('name');
+                if (nameNode && nameNode.textContent === productName) {
+                    const category = foodNode.getAttribute('category');
+                    const priceNode = foodNode.querySelector('price');
+                    const price = parseFloat(priceNode.textContent.replace('$', ''));
+                    const user = auth.currentUser;
+                    if (user) {
+                        const userId = user.uid; 
+                        console.log(userId);
+                        await addToCart(productName, category, price, userId);
+                    } else {
+                        console.log("User not authenticated.");
+                        alert("Please sign in");
+                        // Handle the case where the user is not authenticated
+                    }
+                    return;
+                }
+            }
+            console.log(`Product "${productName}" not found in XML`);
+        }
+    });
+});
+// Function to add a product to the cart
+const addToFuse = async (productName, userId) => {
+    try {
+        // Construct the Firestore document path for the user's cart
+        const fuseDocRef = doc(db, 'fuse', userId, 'products', productName); 
+
+        // Set the document with the product details
+        await setDoc(fuseDocRef, {
+            name: productName,
+            userId: userId
+        });
+
+        console.log(`Product "${productName}" added to fuse`);
+    } catch (error) {
+        console.error("Error adding product to fuse:", error);
+    }
+};
+let xmlDoc;
+let foodElements;
+let productNames;
+
+async function fetchData() {
+    try {
+        const response = await fetch('products.xml');
+        const xmlString = await response.text();
+        const parser = new DOMParser();
+        xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+
+        // Perform operations that depend on xmlDoc here
+        foodElements = xmlDoc.querySelectorAll('food name');
+        productNames = Array.from(foodElements).map(nameElement => nameElement.textContent);
+        console.log(productNames);
+
+        // Now that we have productNames, we can use it for filterData and displaySuggestions
+        const searchInput = document.getElementById('search');
+        const suggestionsList = document.getElementById('suggestions');
+
+        const filterData = (query) => {
+            return productNames.filter(item => item.toLowerCase().includes(query.toLowerCase()));
+        };
+
+        const displaySuggestions = (suggestions) => {
+            suggestionsList.innerHTML = '';
+            suggestions.forEach(suggestion => {
+                const li = document.createElement('li');
+                li.textContent = suggestion;
+                li.classList.add('suggestion');
+                suggestionsList.appendChild(li);
+            });
+            suggestionsList.style.display = searchInput.value.length == 0 ? 'none' : 'block';
+ // Show or hide suggestions
+        };
+
+        searchInput.addEventListener('input', (event) => {
+            const query = event.target.value.trim();
+            const filteredData = filterData(query);
+            displaySuggestions(filteredData);
+        });
+
+        suggestionsList.addEventListener('click', async (event) => {
+            if (event.target.classList.contains('suggestion')) {
+                const confirmed = confirm('Do you want to add this product to your cart?');
+                if (confirmed) {
+                    const productName = event.target.textContent;
+                    const foodNode = foodElements[productNames.indexOf(productName)].parentNode;
+                    const category = foodNode.getAttribute('category');
+                    const priceNode = foodNode.querySelector('price');
+                    const price = parseFloat(priceNode.textContent.replace('$', ''));
+                    const user = auth.currentUser;
+                    if (user) {
+                        const userId = user.uid;
+                        await addToCart(productName, category, price, userId);
+                    } else {
+                        console.log("No user is currently logged in.");
+                        alert("Please sign in");
+                        // Handle the case where no user is logged in
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching XML file:', error);
+    }
+}
+
+fetchData();
+
+document.querySelectorAll('.fuse').forEach(button => {
+    button.addEventListener('click', async () => {
+        const productName = button.getAttribute('data-name');
+        const user = auth.currentUser;
+        if (user) {
+                        const userId = user.uid; // Assuming 'uid' is the property for user ID
+                        console.log(userId);
+                        await addToFuse(productName, userId);
+                    } else {
+                        console.log("User not authenticated.");
+                        // Handle the case where the user is not authenticated
+                        alert("Please sign in");
+                    }
+    })
+});
+    
+                //Display ads in this order
+            var ads = ["images/fuse_ad.jpg","images/cookie_ad.jpg", "images/Pineapple_ad.jpg", "images/fivespice_ad.jpg"];
+            var currentAdIndex = 0;
+            $(document).ready(function() {
+
+
+    // Function to change the image
+    function changeImage() {
+        $('#adImage').attr('src', ads[currentAdIndex]);
+        currentAdIndex = (currentAdIndex + 1) % ads.length;
+    }
+// Function to fetch a random recipe from Spoonacular API
+const fetchRandomRecipe = async () => {
+    try {
+        const apiKey = '86c4722457504ce0bcc2b781e46385f8'; 
+        const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}`);
+        const data = await response.json();
+        const recipe = data.recipes[0]; // Extracting the first recipe from the response
+        return recipe;
+    } catch (error) {
+        console.error('Error fetching random recipe:', error);
+        return null;
+    }
+};
+
+// Function to store recipe data in local storage with an expiration time
+const storeRecipeInLocalStorage = (recipe) => {
+    const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000; // Set expiration time to 24 hours from now
+    
+    const recipeData = {
+        recipe,
+        expirationTime,
+    };
+    localStorage.setItem('randomRecipe', JSON.stringify(recipeData));
+};
+
+// Function to get recipe data from local storage
+const getRecipeFromLocalStorage = () => {
+    const recipeData = localStorage.getItem('randomRecipe');
+  
+    if (recipeData) {
+        const { recipe, expirationTime } = JSON.parse(recipeData);
+        if (expirationTime > new Date().getTime()) {
+            return recipe; // Return stored recipe if it's not expired
+        }
+    }
+    return null; // Return null if no valid recipe is found in local storage
+};
+
+// Function to fetch a random recipe and handle storage
+const getRandomRecipe = async () => {
+    let recipe = getRecipeFromLocalStorage();
+    if (!recipe) {
+        recipe = await fetchRandomRecipe();
+        if (recipe) {
+            storeRecipeInLocalStorage(recipe);
+        }
+    }
+    return recipe;
+};
+
+// Function to display the recipe in the random_recipe div
+const displayRecipe = (recipe) => {
+    const randomRecipeDiv = document.getElementById('random_recipe');
+    if (recipe) {
+        const recipeHTML = `
+            <h2>Recipe of the Day</h2>
+            <img src="${recipe.image}" alt="${recipe.title}" />
+            <h3>${recipe.title}</h3>
+            <p>${recipe.summary}</p>
+            <p>Ready in ${recipe.readyInMinutes} minutes</p>
+            <!-- Add more recipe details here -->
+        `;
+        randomRecipeDiv.innerHTML = recipeHTML;
+    } else {
+        randomRecipeDiv.innerHTML = '<p>No valid recipe available.</p>';
+    }
+};
+
+// Example usage:
+getRandomRecipe().then(recipe => {
+    displayRecipe(recipe);
+});
+    // Initial image change
+    changeImage();
+    
+
+    // Set interval to change image every 3 seconds
+    var timer = setInterval(changeImage, 3000);
+
+    //hamburger nav slide animation
+    $("#nav").hide();
+    $(".cross").hide();
+    $(".hamburger_nav").click(function() {
+        $("#nav").slideToggle("slow", function() {
+            $(".hamburger_nav").hide();
+            $(".cross").show();
+        });
+    });
+
+    $(".cross").click(function() {
+        $("#nav").slideToggle("slow", function() {
+            $(".hamburger_nav").show();
+            $(".cross").hide();
+        })
+    });
+
+    $(window).scroll(function() {
+        var headerHeight = $('#head').outerHeight();
+    
+        var scrollTop = $(window).scrollTop();
+
+        if (scrollTop > headerHeight) {
+            $('#hamburger').addClass('fixed');
+            $('#nav_min_900px').addClass('fixed');
+        } else {
+            $('#hamburger').removeClass('fixed');
+            $('#nav_min_900px').removeClass('fixed');
+        }
+    });
+});
+        </script>
+    </body>
+    </html>
